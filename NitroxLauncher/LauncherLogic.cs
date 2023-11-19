@@ -172,23 +172,7 @@ namespace NitroxLauncher
         }
 
         internal async Task StartMultiplayerAsync()
-        {
-            if (string.IsNullOrWhiteSpace(Config.SubnauticaPath) || !Directory.Exists(Config.SubnauticaPath))
-            {
-                NavigateTo<OptionPage>();
-                throw new Exception("Location of Subnautica is unknown. Set the path to it in settings.");
-            }
-
-            if (PirateDetection.HasTriggered)
-            {
-                throw new Exception("Aarrr! Nitrox walked the plank :(");
-            }
-
-#if RELEASE
-            if (Process.GetProcessesByName("Subnautica").Length > 0)
-            {
-                throw new Exception("An instance of Subnautica is already running");
-            }
+       
 #endif
 
             // TODO: The launcher should override FileRead win32 API for the Subnautica process to give it the modified Assembly-CSharp from memory 
