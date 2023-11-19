@@ -111,23 +111,8 @@ namespace NitroxLauncher
             }
 
             lastFindSubnauticaTask = Task.Factory.StartNew(() =>
-            {
-                PirateDetection.TriggerOnDirectory(path);
-
-                if (!FileSystem.Instance.IsWritable(Directory.GetCurrentDirectory()) || !FileSystem.Instance.IsWritable(path))
-                {
-                    // TODO: Move this check to another place where Nitrox installation can be verified. (i.e: another page on the launcher in order to check permissions, network setup, ...)
-                    if (!FileSystem.Instance.SetFullAccessToCurrentUser(Directory.GetCurrentDirectory()) || !FileSystem.Instance.SetFullAccessToCurrentUser(path))
-                    {
-                        Dispatcher.CurrentDispatcher.BeginInvoke(() =>
-                        {
-                            MessageBox.Show(Application.Current.MainWindow!, "Restart Nitrox Launcher as admin to allow Nitrox to change permissions as needed. This is only needed once. Nitrox will close after this message.", "Required file permission error", MessageBoxButton.OK,
-                                            MessageBoxImage.Error);
-                            Environment.Exit(1);
-                        }, DispatcherPriority.ApplicationIdle);
-                    }
-                }
-                
+        
+            
                 // Save game path as preferred for future sessions.
                 NitroxUser.PreferredGamePath = path;
                 
